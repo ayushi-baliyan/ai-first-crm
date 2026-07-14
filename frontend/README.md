@@ -1,16 +1,46 @@
-# React + Vite
+# AI First CRM (HCP Module)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered CRM application for Healthcare Professional (HCP) interaction management.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- AI Summary Generation
+- AI Chat Assistant
+- Log Doctor Interactions
+- Interaction History
+- Follow-up Suggestions
+- HCP Profile Fetching
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Frontend
+- React
+- Vite
+- Material UI
 
-## Expanding the ESLint configuration
+Backend
+- FastAPI
+- LangGraph
+- LangChain
+- Groq LLM
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Run Project
+
+### Backend
+
+```bash
+cd backend
+python -m uvicorn main:app --reload
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Screenshots
+
+(Add screenshots here)
