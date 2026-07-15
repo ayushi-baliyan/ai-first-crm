@@ -18,6 +18,12 @@ export default function InteractionForm() {
   });
 
   const [summary, setSummary] = useState("");
+  const [error, setError] = useState("");
+
+  // Render Backend URL
+  const API_URL =
+    import.meta.env.VITE_API_URL ||
+    "https://ai-first-crm-backend-gfwr.onrender.com";
 
   const handleChange = (e) => {
     setForm({
@@ -27,8 +33,11 @@ export default function InteractionForm() {
   };
 
   const handleSubmit = async () => {
+    setError("");
+    setSummary("");
+
     try {
-      const res = await fetch("http://127.0.0.1:8000/summary", {
+      const res = await fetch(`${API_URL}/summary`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,11 +47,16 @@ export default function InteractionForm() {
         }),
       });
 
+      if (!res.ok) {
+        throw new Error("Backend Error");
+      }
+
       const data = await res.json();
 
       setSummary(data.summary);
     } catch (err) {
-      alert("Backend not running");
+      console.error(err);
+      setError("Unable to connect to backend.");
     }
   };
 
@@ -53,6 +67,7 @@ export default function InteractionForm() {
         name="doctor"
         value={form.doctor}
         onChange={handleChange}
+        fullWidth
       />
 
       <TextField
@@ -60,6 +75,7 @@ export default function InteractionForm() {
         name="hospital"
         value={form.hospital}
         onChange={handleChange}
+        fullWidth
       />
 
       <TextField
@@ -67,6 +83,7 @@ export default function InteractionForm() {
         name="speciality"
         value={form.speciality}
         onChange={handleChange}
+        fullWidth
       />
 
       <TextField
@@ -75,6 +92,7 @@ export default function InteractionForm() {
         name="interactionType"
         value={form.interactionType}
         onChange={handleChange}
+        fullWidth
       >
         <MenuItem value="Visit">Visit</MenuItem>
         <MenuItem value="Call">Call</MenuItem>
@@ -88,6 +106,7 @@ export default function InteractionForm() {
         rows={5}
         value={form.notes}
         onChange={handleChange}
+        fullWidth
       />
 
       <Button
@@ -108,6 +127,12 @@ export default function InteractionForm() {
             {summary}
           </Alert>
         </>
+      )}
+
+      {error && (
+        <Alert severity="error">
+          {error}
+        </Alert>
       )}
     </Stack>
   );
