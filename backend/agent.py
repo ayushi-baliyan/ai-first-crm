@@ -8,7 +8,7 @@ load_dotenv()
 
 llm = ChatGroq(
     groq_api_key=os.getenv("GROQ_API_KEY"),
-    model=os.getenv("MODEL_NAME")
+    model="llama-3.3-70b-versatile"
 )
 
 def ai_node(state):
@@ -19,9 +19,7 @@ def ai_node(state):
 graph = StateGraph(dict)
 
 graph.add_node("AI", ai_node)
-
 graph.set_entry_point("AI")
-
 graph.add_edge("AI", END)
 
 crm_agent = graph.compile()
